@@ -8,20 +8,20 @@
     "location": {
       "value": "${AZURE_LOCATION}"
     },
-    "principalId": {
-      "value": "${AZURE_PRINCIPAL_ID}"
+    "resourceGroupName": {
+      "value": "${RESOURCE_GROUP_NAME}"
+    },
+    "creater": {
+      "value": "${CREATER=taichi_kitamura}"
+    },
+    "managedBy": {
+      "value": "${STAPP_MANAGED_BY=Microsoft.Web/staticSites}"
     },
     "stappName": {
       "value": "${STAPP_NAME}"
     },
     "stappLocation": {
       "value": "${STAPP_LOCATION}"
-    },
-    "stappIdentityType": {
-      "value": "${STAPP_IDENTITY_TYPE=SystemAssigned}"
-    },
-    "stappUserAssignedIdentityResourceId": {
-      "value": "${STAPP_USER_ASSIGNED_IDENTITY_RESOURCE_ID}"
     },
     "stappAllowConfigFileUpdates": {
       "value": "${STAPP_ALLOW_CONFIG_FILE_UPDATES=false}"
@@ -91,39 +91,6 @@
     },
     "stappSkuTier": {
       "value": "${STAPP_SKU_TIER=Free}"
-    },
-    "stappSkuCapabilityName": {
-      "value": "${STAPP_SKU_CAPABILITY_NAME}"
-    },
-    "stappSkuCapabilityReason": {
-      "value": "${STAPP_SKU_CAPABILITY_REASON}"
-    },
-    "stappSkuCapabilityValue": {
-      "value": "${STAPP_SKU_CAPABILITY_VALUE}"
-    },
-    "stappResourceCapacity": {
-      "value": "${STAPP_RESOURCE_CAPACITY=1}"
-    },
-    "stappSkuFamily": {
-      "value": "${STAPP_SKU_FAMILY=A}"
-    },
-    "stappSkuSize": {
-      "value": "${STAPP_SKU_SIZE}"
-    },
-    "stappSkuDefaultWorkers": {
-      "value": "${STAPP_SKU_DEFAULT_WORKERS}"
-    },
-    "stappSkuElasticMaximum": {
-      "value": "${STAPP_SKU_ELASTIC_MAXIMUM}"
-    },
-    "stappSkuMaximumWorkers": {
-      "value": "${STAPP_SKU_MAXIMUM_WORKERS}"
-    },
-    "stappSkuMinimumWorkers": {
-      "value": "${STAPP_SKU_MINIMUM_WORKERS}"
-    },
-    "stappSkuScaleType": {
-      "value": "${STAPP_SKU_SCALE_TYPE}"
     }
   }
 }

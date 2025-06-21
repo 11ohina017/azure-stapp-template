@@ -18,12 +18,6 @@ param tags object = {
 }
 
 // # Id ----------------------------------------------------
-@description('Null-Allow: マネージドサービスIDのタイプ: SystemAssigned, UserAssigned, or None')
-param identityType string 
-
-@description('ユーザー割り当てIDのリソースID')
-param userAssignedIdentityResourceId string
-
 @description('staticwebapp.config.jsonなどの設定ファイルの変更をAzure側で反映できる: true or false')
 param allowConfigFileUpdates bool = false
 
@@ -89,41 +83,9 @@ param publicNetworkAccess string = 'Enabled'
 param stagingEnvironmentPolicy string = 'Enabled'
 
 // # Sku ----------------------------------------------------
-@description('Null-Allow: SKUの機能名')
-param skuCapabilityName string
-
-@description('Null-Allow: SKU機能の理由')
-param skuCapabilityReason string
-
-@description('Null-Allow: SKU機能の値')
-param skuCapabilityValue string
-
-@description('Null-Allow: リソースに割り当てられたインスタンス数')
-param resourceCapacity int = 1
-
-@description('Null-Allow: SKUのファミリーコード')
-param skuFamily string = 'A'
 
 @description('リソースSKUの名前: Free, Standard, Premium')
 param skuName string = 'Free'
-
-@description('リソースSKUのサイズ指定')
-param skuSize string = 'Free'
-
-@description('Null-Allow: SKUのデフォルトのワーカー数')
-param skuDefaultWorkers int = 1
-
-@description('Null-Allow: 弾性ワーカーの最大数')
-param skuElasticMaximum int = 10
-
-@description('Null-Allow: ワーカーの最大数')
-param skuMaximumWorkers int = 10
-
-@description('Null-Allow: ワーカーの最小数')
-param skuMinimumWorkers int = 1
-
-@description('Null-Allow: スケール構成タイプ')
-param skuScaleType string = 'Automatic'
 
 @description('リソースSKUの価格帯: SWAではsku nameと同じ')
 param skuTier string = skuName

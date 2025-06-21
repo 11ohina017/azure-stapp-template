@@ -9,27 +9,25 @@ param environmentName string
 @description('Primary location for all resources')
 param location string
 
+@description('リソースグループの名前。空文字列の場合は自動生成')
 param resourceGroupName string = ''
-param managedBy string = 'Microsoft.Web/staticSites'
+
+@description('作成者の名前')
+param creater string = 'taichi_kitamura'
 
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
-var tags = { 'azd-env-name': environmentName }
+var tags = { project: environmentName, creater: creater }
 
 //- Static Web App ----------------------------------------------------
-// 静的ウェブアプリ用パラメーター
+@description('リソースを管理するリソースのID。')
+param managedBy string = 'Microsoft.Web/staticSites'
+
 @description('静的ウェブアプリの名前')
 param stappName string = 'stapp-pj-sub-env-region-001'
 
 @description('リソースをデプロイする場所。リソースグループの場所がデフォルトです。')
 param stappLocation string
-
-// # Id
-@description('マネージドサービスIDのタイプ: SystemAssigned, UserAssigned, or None')
-param stappIdentityType string = 'SystemAssigned'
-
-@description('ユーザー割り当てIDのリソースID')
-param stappUserAssignedIdentityResourceId string = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'
 
 @description('staticwebapp.config.jsonなどの設定ファイルの変更をAzure側で反映できる: true or false')
 param stappAllowConfigFileUpdates bool = false
@@ -102,38 +100,6 @@ param stappSkuName string = 'Free'
 @description('リソースSKUの価格帯: SWAではsku nameと同じ')
 param stappSkuTier string = stappSkuName
 
-@description('Null-Allow: SKUの機能名')
-param stappSkuCapabilityName string = ''
-
-@description('Null-Allow: SKU機能の理由')
-param stappSkuCapabilityReason string = ''
-
-@description('Null-Allow: SKU機能の値')
-param stappSkuCapabilityValue string = ''
-
-@description('Null-Allow: リソースに割り当てられたインスタンス数')
-param stappResourceCapacity int = 1
-
-@description('Null-Allow: SKUのファミリーコード')
-param stappSkuFamily string = 'A'
-
-@description('Null-Allow: リソースSKUのサイズ指定')
-param stappSkuSize string
-
-@description('Null-Allow: SKUのデフォルトのワーカー数')
-param stappSkuDefaultWorkers int
-
-@description('Null-Allow: 弾性ワーカーの最大数')
-param stappSkuElasticMaximum int
-
-@description('Null-Allow: ワーカーの最大数')
-param stappSkuMaximumWorkers int
-
-@description('Null-Allow: ワーカーの最小数')
-param stappSkuMinimumWorkers int
-
-@description('Null-Allow: スケール構成タイプ')
-param stappSkuScaleType string
 //---------------------------------------------
 
 // リソースグループの作成
@@ -153,8 +119,6 @@ module web './compute/static-web-app.bicep' = {
     staticWebAppName: !empty(stappName) ? stappName : '${abbrs.webStaticSites}web-${resourceToken}'
     location: stappLocation
     tags: tags
-    identityType: stappIdentityType
-    userAssignedIdentityResourceId: stappUserAssignedIdentityResourceId
     allowConfigFileUpdates: stappAllowConfigFileUpdates
     targetBranch: stappTargetBranch
     apiBuildCommand: stappApiBuildCommand
@@ -179,16 +143,5 @@ module web './compute/static-web-app.bicep' = {
     repositoryOwner: stappRepositoryOwner
     repositoryName: stappRepositoryName
     templateRepositoryUrl: stappTemplateRepositoryUrl
-    skuCapabilityName: stappSkuCapabilityName
-    skuCapabilityReason: stappSkuCapabilityReason
-    skuCapabilityValue: stappSkuCapabilityValue
-    resourceCapacity: stappResourceCapacity
-    skuFamily: stappSkuFamily
-    skuSize: stappSkuSize
-    skuDefaultWorkers: stappSkuDefaultWorkers
-    skuElasticMaximum: stappSkuElasticMaximum
-    skuMaximumWorkers: stappSkuMaximumWorkers
-    skuMinimumWorkers: stappSkuMinimumWorkers
-    skuScaleType: stappSkuScaleType
   }
 }
