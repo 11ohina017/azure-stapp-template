@@ -1,0 +1,129 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environmentName": {
+      "value": "${AZURE_ENV_NAME}"
+    },
+    "location": {
+      "value": "${AZURE_LOCATION}"
+    },
+    "principalId": {
+      "value": "${AZURE_PRINCIPAL_ID}"
+    },
+    "stappName": {
+      "value": "${STAPP_NAME}"
+    },
+    "stappLocation": {
+      "value": "${STAPP_LOCATION}"
+    },
+    "stappIdentityType": {
+      "value": "${STAPP_IDENTITY_TYPE=SystemAssigned}"
+    },
+    "stappUserAssignedIdentityResourceId": {
+      "value": "${STAPP_USER_ASSIGNED_IDENTITY_RESOURCE_ID}"
+    },
+    "stappAllowConfigFileUpdates": {
+      "value": "${STAPP_ALLOW_CONFIG_FILE_UPDATES=false}"
+    },
+    "stappTargetBranch": {
+      "value": "${STAPP_TARGET_BRANCH=main}"
+    },
+    "stappApiBuildCommand": {
+      "value": "${STAPP_API_BUILD_COMMAND=npm run build:api}"
+    },
+    "stappApiLocation": {
+      "value": "${STAPP_API_LOCATION=api}"
+    },
+    "stappAppArtifactLocation": {
+      "value": "${STAPP_APP_ARTIFACT_LOCATION=dist}"
+    },
+    "stappAppBuildCommand": {
+      "value": "${STAPP_APP_BUILD_COMMAND=npm run build:web}"
+    },
+    "stappAppLocation": {
+      "value": "${STAPP_APP_LOCATION=web}"
+    },
+    "stappOutputLocation": {
+      "value": "${STAPP_OUTPUT_LOCATION=output}"
+    },
+    "stappProvider": {
+      "value": "${STAPP_PROVIDER=GitHub}"
+    },
+    "stappTemplateDescription": {
+      "value": "${STAPP_TEMPLATE_DESCRIPTION=My Static Web App}"
+    },
+    "stappIsPrivate": {
+      "value": "${STAPP_IS_PRIVATE=false}"
+    },
+    "stappSkipGithubActionWorkflowGeneration": {
+      "value": "${STAPP_SKIP_GITHUB_ACTION_WORKFLOW_GENERATION=false}"
+    },
+    "stappEnterpriseGradeCdnStatus": {
+      "value": "${STAPP_ENTERPRISE_GRADE_CDN_STATUS=Disabled}"
+    },
+    "stappPublicNetworkAccess": {
+      "value": "${STAPP_PUBLIC_NETWORK_ACCESS=Enabled}"
+    },
+    "stappStagingEnvironmentPolicy": {
+      "value": "${STAPP_STAGING_ENVIRONMENT_POLICY=Enabled}"
+    },
+    "stappGithubActionSecretNameOverride": {
+      "value": "${STAPP_GITHUB_ACTION_SECRET_NAME_OVERRIDE}"
+    },
+    "stappRepositoryUrl": {
+      "value": "${STAPP_REPOSITORY_URL}"
+    },
+    "stappRepositoryToken": {
+      "value": "${STAPP_REPOSITORY_TOKEN}"
+    },
+    "stappRepositoryOwner": {
+      "value": "${STAPP_REPOSITORY_OWNER}"
+    },
+    "stappRepositoryName": {
+      "value": "${STAPP_REPOSITORY_NAME}"
+    },
+    "stappTemplateRepositoryUrl": {
+      "value": "${STAPP_TEMPLATE_REPOSITORY_URL}"
+    },
+    "stappSkuName": {
+      "value": "${STAPP_SKU_NAME=Free}"
+    },
+    "stappSkuTier": {
+      "value": "${STAPP_SKU_TIER=Free}"
+    },
+    "stappSkuCapabilityName": {
+      "value": "${STAPP_SKU_CAPABILITY_NAME}"
+    },
+    "stappSkuCapabilityReason": {
+      "value": "${STAPP_SKU_CAPABILITY_REASON}"
+    },
+    "stappSkuCapabilityValue": {
+      "value": "${STAPP_SKU_CAPABILITY_VALUE}"
+    },
+    "stappResourceCapacity": {
+      "value": "${STAPP_RESOURCE_CAPACITY=1}"
+    },
+    "stappSkuFamily": {
+      "value": "${STAPP_SKU_FAMILY=A}"
+    },
+    "stappSkuSize": {
+      "value": "${STAPP_SKU_SIZE}"
+    },
+    "stappSkuDefaultWorkers": {
+      "value": "${STAPP_SKU_DEFAULT_WORKERS}"
+    },
+    "stappSkuElasticMaximum": {
+      "value": "${STAPP_SKU_ELASTIC_MAXIMUM}"
+    },
+    "stappSkuMaximumWorkers": {
+      "value": "${STAPP_SKU_MAXIMUM_WORKERS}"
+    },
+    "stappSkuMinimumWorkers": {
+      "value": "${STAPP_SKU_MINIMUM_WORKERS}"
+    },
+    "stappSkuScaleType": {
+      "value": "${STAPP_SKU_SCALE_TYPE}"
+    }
+  }
+}
