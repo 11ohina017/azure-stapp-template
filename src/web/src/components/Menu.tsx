@@ -96,15 +96,33 @@ const Menu: React.FC = () => {
           </p>
         </div>
 
-        {/* Featured Menu Items with Images */}
+        {/* メニュー画像 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-xl ring-4 ring-red-200 ring-opacity-50">
             <div className="bg-red-600 text-white text-center py-2 text-sm font-bold">
-              🍜 看板メニュー
+              🍜 期間定メニュー
             </div>
             <div className="relative overflow-hidden">
               <img
-                src="https://images.pexels.com/photos/1395319/pexels-photo-1395319.jpeg?auto=compress&cs=tinysrgb&w=400"
+                src="img/hiyashi_chuka.png"
+                alt="冷やし中華"
+                className="w-full h-48 object-cover transform hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+            </div>
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-3">
+                <h3 className="text-xl font-bold text-gray-900">冷やし中華</h3>
+                <span className="text-2xl font-bold text-red-600">¥990</span>
+              </div>
+              <p className="text-gray-600 leading-relaxed">暑い季節にぴったりの爽やかな一品、冷やし中華が期間限定で登場。</p>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
+            <div className="relative overflow-hidden">
+              <img
+                src="img/chukasoba.png"
                 alt="中華そば"
                 className="w-full h-48 object-cover transform hover:scale-110 transition-transform duration-500"
               />
@@ -115,14 +133,14 @@ const Menu: React.FC = () => {
                 <h3 className="text-xl font-bold text-gray-900">中華そば</h3>
                 <span className="text-2xl font-bold text-red-600">¥880</span>
               </div>
-              <p className="text-gray-600 leading-relaxed">当店自慢の鶏ガラ醤油スープ。昔ながらの優しい味わい</p>
+              <p className="text-gray-600 leading-relaxed">当店自慢の鶏ガラ醤油スープ。昔ながらの優しい味わい。</p>
             </div>
           </div>
 
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
             <div className="relative overflow-hidden">
               <img
-                src="https://images.pexels.com/photos/1395319/pexels-photo-1395319.jpeg?auto=compress&cs=tinysrgb&w=400"
+                src="img/gomasoba.png"
                 alt="ごまそば"
                 className="w-full h-48 object-cover transform hover:scale-110 transition-transform duration-500"
               />
@@ -133,14 +151,32 @@ const Menu: React.FC = () => {
                 <h3 className="text-xl font-bold text-gray-900">ごまそば</h3>
                 <span className="text-2xl font-bold text-red-600">¥990</span>
               </div>
-              <p className="text-gray-600 leading-relaxed">濃厚なごまの風味が楽しめる人気の一杯</p>
+              <p className="text-gray-600 leading-relaxed">濃厚なごまの風味が楽しめる人気の一杯。</p>
             </div>
           </div>
 
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
             <div className="relative overflow-hidden">
               <img
-                src="https://images.pexels.com/photos/4518844/pexels-photo-4518844.jpeg?auto=compress&cs=tinysrgb&w=400"
+                src="img/siosoba.png"
+                alt="しおそば"
+                className="w-full h-48 object-cover transform hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+            </div>
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-3">
+                <h3 className="text-xl font-bold text-gray-900">しおそば</h3>
+                <span className="text-2xl font-bold text-red-600">¥880</span>
+              </div>
+              <p className="text-gray-600 leading-relaxed">当店自慢の鶏ガラ醤油スープ。昔ながらの優しい味わい。</p>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
+            <div className="relative overflow-hidden">
+              <img
+                src="img/gyoza.png"
                 alt="餃子"
                 className="w-full h-48 object-cover transform hover:scale-110 transition-transform duration-500"
               />
@@ -151,7 +187,7 @@ const Menu: React.FC = () => {
                 <h3 className="text-xl font-bold text-gray-900">餃子</h3>
                 <span className="text-2xl font-bold text-red-600">¥297~</span>
               </div>
-              <p className="text-gray-600 leading-relaxed">手作り餃子。パリッと香ばしく焼き上げました</p>
+              <p className="text-gray-600 leading-relaxed">手作り餃子。パリッと香ばしく焼き上げました。</p>
             </div>
           </div>
         </div>

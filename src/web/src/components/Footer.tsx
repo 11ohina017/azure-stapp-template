@@ -1,5 +1,6 @@
 import React from 'react';
 import { Instagram, Twitter, Phone, MapPin } from 'lucide-react';
+import { StoreInfo } from '../constants/storeInfo';
 
 const Footer: React.FC = () => {
   return (
@@ -8,13 +9,13 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Shop Info */}
           <div>
-            <h3 className="text-2xl font-bold mb-4">麵屋◯◯</h3>
+            <h3 className="text-2xl font-bold mb-4">{StoreInfo.STORE_NAME}</h3>
             <p className="text-gray-300 mb-4">
-              鶏ガラ醤油の昔ながらの中華そば
+              {StoreInfo.DESCRIPTION}
             </p>
             <div className="flex space-x-4">
               <a 
-                href="https://www.instagram.com/menyadago/" 
+                href={StoreInfo.INSTAGRAM_URL}
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-white transition-colors"
@@ -22,7 +23,7 @@ const Footer: React.FC = () => {
                 <Instagram size={24} />
               </a>
               <a 
-                href="https://x.com/8wzarlcbgkpeq0m" 
+                href={StoreInfo.TWITTER_URL}
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-white transition-colors"
@@ -38,13 +39,13 @@ const Footer: React.FC = () => {
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
                 <Phone size={16} className="text-red-400" />
-                <span className="text-gray-300">086-234-1233</span>
+                <span className="text-gray-300">{StoreInfo.PHONE_NUMBER}</span>
               </div>
               <div className="flex items-start space-x-2">
                 <MapPin size={16} className="text-red-400 mt-1 flex-shrink-0" />
                 <span className="text-gray-300 text-sm">
-                  〒700-0914<br />
-                  岡山県岡山市北区鹿田町1丁目7−19
+                  {StoreInfo.POSTAL_CODE}<br />
+                  {StoreInfo.ADDRESS}
                 </span>
               </div>
             </div>
@@ -54,16 +55,16 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">営業時間</h4>
             <div className="text-sm text-gray-300 space-y-1">
-              <div>平日: 11:30-14:00, 18:00-21:00</div>
-              <div>土曜: 定休日</div>
-              <div>日曜: 11:30-14:00</div>
+              <div>平日: {StoreInfo.WEEKDAY_HOURS}</div>
+              <div>土曜: {StoreInfo.SATURDAY_HOURS}</div>
+              <div>日曜: {StoreInfo.SUNDAY_HOURS}</div>
             </div>
           </div>
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © 2024 麵屋◯◯. All rights reserved.
+            © 2025 {StoreInfo.STORE_NAME}. All rights reserved.
           </p>
         </div>
       </div>

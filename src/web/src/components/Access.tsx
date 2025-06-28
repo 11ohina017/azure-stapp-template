@@ -1,5 +1,6 @@
 import React from 'react';
 import { MapPin, Clock, Phone, CreditCard, Car, Instagram, Twitter } from 'lucide-react';
+import { StoreInfo } from '../constants/storeInfo';
 
 const Access: React.FC = () => {
   return (
@@ -26,7 +27,7 @@ const Access: React.FC = () => {
                   <MapPin className="text-red-600 mt-1 flex-shrink-0" size={20} />
                   <div>
                     <div className="font-semibold text-gray-900">住所</div>
-                    <div className="text-gray-600">〒700-0914<br />岡山県岡山市北区鹿田町1丁目7−19</div>
+                    <div className="text-gray-600">{StoreInfo.POSTAL_CODE}<br />{StoreInfo.ADDRESS}</div>
                   </div>
                 </div>
 
@@ -34,8 +35,8 @@ const Access: React.FC = () => {
                   <Phone className="text-red-600 mt-1 flex-shrink-0" size={20} />
                   <div>
                     <div className="font-semibold text-gray-900">電話番号</div>
-                    <a href="tel:086-234-1233" className="text-red-600 hover:text-red-700 transition-colors">
-                      086-234-1233
+                    <a href={`tel:${StoreInfo.PHONE_NUMBER}`} className="text-red-600 hover:text-red-700 transition-colors">
+                      {StoreInfo.PHONE_NUMBER}
                     </a>
                   </div>
                 </div>
@@ -44,7 +45,7 @@ const Access: React.FC = () => {
                   <Car className="text-red-600 mt-1 flex-shrink-0" size={20} />
                   <div>
                     <div className="font-semibold text-gray-900">駐車場</div>
-                    <div className="text-gray-600">なし</div>
+                    <div className="text-gray-600">{StoreInfo.PARKING}</div>
                   </div>
                 </div>
 
@@ -52,7 +53,7 @@ const Access: React.FC = () => {
                   <CreditCard className="text-red-600 mt-1 flex-shrink-0" size={20} />
                   <div>
                     <div className="font-semibold text-gray-900">お支払い方法</div>
-                    <div className="text-gray-600">現金 / PayPay</div>
+                    <div className="text-gray-600">{StoreInfo.PAYMENT_METHODS}</div>
                   </div>
                 </div>
 
@@ -60,7 +61,7 @@ const Access: React.FC = () => {
                   <div className="text-red-600 mt-1 flex-shrink-0">📅</div>
                   <div>
                     <div className="font-semibold text-gray-900">創業日</div>
-                    <div className="text-gray-600">2018年4月15日</div>
+                    <div className="text-gray-600">{StoreInfo.OPENING_DATE}</div>
                   </div>
                 </div>
 
@@ -69,12 +70,12 @@ const Access: React.FC = () => {
                   <div>
                     <div className="font-semibold text-gray-900">Instagram</div>
                     <a 
-                      href="https://www.instagram.com/menyadago/" 
+                      href={StoreInfo.INSTAGRAM_URL}
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="text-red-600 hover:text-red-700 transition-colors"
                     >
-                      @menyadago
+                      {StoreInfo.INSTAGRAM_HANDLE}
                     </a>
                   </div>
                 </div>
@@ -84,12 +85,12 @@ const Access: React.FC = () => {
                   <div>
                     <div className="font-semibold text-gray-900">X (Twitter)</div>
                     <a 
-                      href="https://x.com/8wzarlcbgkpeq0m" 
+                      href={StoreInfo.TWITTER_URL}
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="text-red-600 hover:text-red-700 transition-colors"
                     >
-                      @8wzarlcbgkpeq0m
+                      {StoreInfo.TWITTER_HANDLE}
                     </a>
                   </div>
                 </div>
@@ -107,23 +108,23 @@ const Access: React.FC = () => {
                 <div className="flex justify-between items-center py-2 border-b border-gray-100">
                   <span className="font-semibold text-gray-900">平日</span>
                   <div className="text-right">
-                    <div className="text-gray-900">11:30 - 14:00</div>
-                    <div className="text-gray-900">18:00 - 21:00</div>
+                    <div className="text-gray-900">{StoreInfo.WEEKDAY_LUNCH_HOURS}</div>
+                    <div className="text-gray-900">{StoreInfo.WEEKDAY_DINNER_HOURS}</div>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-2 border-b border-gray-100">
                   <span className="font-semibold text-gray-900">土曜日</span>
-                  <span className="text-red-600 font-semibold">定休日</span>
+                  <span className="text-red-600 font-semibold">{StoreInfo.SATURDAY_HOURS}</span>
                 </div>
                 <div className="flex justify-between items-center py-2">
                   <span className="font-semibold text-gray-900">日曜日</span>
-                  <span className="text-gray-900">11:30 - 14:00</span>
+                  <span className="text-gray-900">{StoreInfo.SUNDAY_HOURS}</span>
                 </div>
               </div>
               
               <div className="mt-4 p-3 bg-yellow-50 rounded-lg">
                 <p className="text-sm text-yellow-800">
-                  ※ ラストオーダーは閉店30分前までとなります
+                  ※ {StoreInfo.LAST_ORDER_NOTE}
                 </p>
               </div>
             </div>
@@ -132,24 +133,29 @@ const Access: React.FC = () => {
           {/* Map */}
           <div className="bg-white rounded-2xl shadow-lg p-8">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">地図</h3>
-            <div className="w-full h-96 bg-gray-300 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="mx-auto mb-4 text-gray-500" size={48} />
-                <p className="text-gray-600 mb-2">Google Maps</p>
-                <p className="text-sm text-gray-500">
-                  岡山県岡山市北区鹿田町1丁目7−19
-                </p>
-                <button className="mt-4 bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition-colors">
-                  <a 
-                    href="https://maps.google.com/?q=岡山県岡山市北区鹿田町1丁目7−19" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-white no-underline"
-                  >
-                    Googleマップで開く
-                  </a>
-                </button>
-              </div>
+            <div className="w-full h-96 rounded-lg overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3276.7123456789!2d133.9234567!3d34.6678901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s%E5%B2%A1%E5%B1%B1%E7%9C%8C%E5%B2%A1%E5%B1%B1%E5%B8%82%E5%8C%97%E5%8C%BA%E9%B9%BF%E7%94%B0%E7%94%BA1%E4%B8%81%E7%9B%AE7-19!5e0!3m2!1sja!2sjp!4v1640995200000!5m2!1sja!2sjp"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="店舗所在地"
+              ></iframe>
+            </div>
+            <div className="mt-4 text-center">
+              <button className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition-colors">
+                <a 
+                  href={`https://maps.google.com/?q=${StoreInfo.ADDRESS}`}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-white no-underline"
+                >
+                  Googleマップで開く
+                </a>
+              </button>
             </div>
           </div>
         </div>
