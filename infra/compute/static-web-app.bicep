@@ -17,11 +17,11 @@ param tags object = {
   createdBy: 'taichi_kitamura'
 }
 
-// # Id ----------------------------------------------------
+// # Id Settings ----------------------------------------------------
 @description('staticwebapp.config.jsonなどの設定ファイルの変更をAzure側で反映できる: true or false')
 param allowConfigFileUpdates bool = false
 
-// # Git ----------------------------------------------------
+// # Git Settings ----------------------------------------------------
 @description('ターゲットブランチ')
 param targetBranch string = 'main'
 
@@ -104,7 +104,7 @@ resource symbolicname 'Microsoft.Web/staticSites@2024-04-01' = {
   location: location // リソースがデプロイされるAzureリージョン
   name: staticWebAppName // 静的ウェブアプリの名前
   properties: {
-    allowConfigFileUpdates: allowConfigFileUpdates // 設定ファイルの更新を許可するかどうか
+    allowConfigFileUpdates: allowConfigFileUpdates // staticwebapp.config.jsonなどの設定ファイルの変更をAzure側で反映するかどうか
     branch: targetBranch // リポジトリのターゲットブランチ
     buildProperties: {
       apiBuildCommand: apiBuildCommand // APIのビルドコマンド
@@ -119,17 +119,18 @@ resource symbolicname 'Microsoft.Web/staticSites@2024-04-01' = {
     enterpriseGradeCdnStatus: empty(enterpriseGradeCdnStatus) ? null : enterpriseGradeCdnStatus // エンタープライズグレードCDNのステータス
     provider: provider // リポジトリのプロバイダー
     publicNetworkAccess: publicNetworkAccess // 公共ネットワークアクセスを許可するかどうか
-    repositoryToken: repositoryToken // リポジトリへのアクセス用トークン
-    repositoryUrl: repositoryUrl // リポジトリのURL
     stagingEnvironmentPolicy: stagingEnvironmentPolicy // PR単位などで動的に生成されるプレビュー環境を有効にするかどうか
-    // Static Web Appsと同時にGitリポジトリを作成する場合は、以下のように設定
-    templateProperties: (!empty(templateDescription) && !empty(repositoryOwner) && !empty(repositoryName) && !empty(templateRepositoryUrl)) ? {
+    repositoryToken: repositoryToken // リポジトリへのアクセス用トークン
+    // 既存のGitリポジトリを使用する場合の設定
+    repositoryUrl: repositoryUrl // リポジトリのURL
+    // リポジトリが未作成の場合の設定: Static Web Appsと同時に新規にGitリポジトリを作成する
+    templateProperties: {
       description: templateDescription // 静的ウェブアプリの説明
       isPrivate: isPrivate // リポジトリがプライベートかどうか
       owner: repositoryOwner // リポジトリの所有者
       repositoryName: repositoryName // リポジトリの名前
       templateRepositoryUrl: templateRepositoryUrl // テンプレートリポジトリのURL
-    } : null
+    }
   }
   sku: {
     /* 今回は使用しないパラメーターなのでコメントアウト

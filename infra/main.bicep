@@ -2,11 +2,11 @@ targetScope = 'subscription'
 
 @minLength(1)
 @maxLength(64)
-@description('Name of the the environment which is used to generate a short unique hash used in all resources.')
+@description('環境名。プロジェクト名などを設定する。リソース名の一部として使用される')
 param environmentName string
 
 @minLength(1)
-@description('Primary location for all resources')
+@description('リソースググルーのリージョン')
 param location string
 
 @description('リソースグループの名前。空文字列の場合は自動生成')
@@ -20,19 +20,19 @@ var resourceToken = toLower(uniqueString(subscription().id, environmentName, loc
 var tags = { project: environmentName, creater: creater }
 
 //- Static Web App ----------------------------------------------------
-@description('リソースを管理するリソースのID。')
+@description('リソースを管理するリソースのID')
 param managedBy string = 'Microsoft.Web/staticSites'
 
 @description('静的ウェブアプリの名前')
 param stappName string = 'stapp-pj-sub-env-region-001'
 
-@description('リソースをデプロイする場所。リソースグループの場所がデフォルトです。')
-param stappLocation string
+@description('リソースをデプロイする場所。リソースグループの場所がデフォルト。')
+param stappLocation string = location
 
 @description('staticwebapp.config.jsonなどの設定ファイルの変更をAzure側で反映できる: true or false')
 param stappAllowConfigFileUpdates bool = false
 
-// # Git
+// # Git Settings
 @description('ターゲットブランチ')
 param stappTargetBranch string = 'main'
 
@@ -75,25 +75,25 @@ param stappPublicNetworkAccess string = 'Enabled'
 @description('PR単位などで動的に生成されるプレビュー環境を有効にするかどうか')
 param stappStagingEnvironmentPolicy string = 'Enabled'
 
-@description('Null-Allow: GitHub Actionのシークレット名の上書き:セキュリティの関係でデフォルトの変数:AZUのE_STATIC_WEB_APPS_API_TOKEN以外の値を使用したいときに使う')
+@description('GitHub Actionのシークレット名の上書き:セキュリティの関係でデフォルトの変数:AZUのE_STATIC_WEB_APPS_API_TOKEN以外の値を使用したいときに使う')
 param stappGithubActionSecretNameOverride string
 
-@description('Null-Allow: GitHubリポジトリのURL')
+@description('GitHubリポジトリのURL')
 param stappRepositoryUrl string
 
-@description('Null-Allow: リポジトリへのアクセス用トークン')
+@description('リポジトリへのアクセス用トークン')
 param stappRepositoryToken string
 
-@description('Null-Allow: リポジトリの所有者')
+@description('リポジトリの所有者')
 param stappRepositoryOwner string
 
-@description('Null-Allow: リポジトリの名前')
+@description('リポジトリの名前')
 param stappRepositoryName string
 
-@description('Null-Allow: テンプレートリポジトリのURL')
+@description('テンプレートリポジトリのURL')
 param stappTemplateRepositoryUrl string
 
-// # Sku
+// # Sku Settings
 @description('リソースSKUの名前: Free, Standard, Premium')
 param stappSkuName string = 'Free'
 
@@ -101,7 +101,6 @@ param stappSkuName string = 'Free'
 param stappSkuTier string = stappSkuName
 
 //---------------------------------------------
-
 // リソースグループの作成
 resource rg 'Microsoft.Resources/resourceGroups@2025-04-01' = {
   location: location
@@ -111,7 +110,8 @@ resource rg 'Microsoft.Resources/resourceGroups@2025-04-01' = {
   tags: tags
 }
 
-// The application frontend
+//----------------------------------------------
+// Static Web Appのデプロイ
 module web './compute/static-web-app.bicep' = {
   name: stappName
   scope: rg
@@ -136,7 +136,6 @@ module web './compute/static-web-app.bicep' = {
     stagingEnvironmentPolicy: stappStagingEnvironmentPolicy
     skuName: stappSkuName
     skuTier: stappSkuTier
-    // 以下はstatic-web-app.bicepのNull-Allow必須パラメータ
     githubActionSecretNameOverride: stappGithubActionSecretNameOverride
     repositoryUrl: stappRepositoryUrl
     repositoryToken: stappRepositoryToken

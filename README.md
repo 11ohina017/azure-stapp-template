@@ -1,6 +1,7 @@
 # はじめに
 
-このリポジトリはAzure Static Web Apps上で動作するReactアプリケーションを提供します。  
+このリポジトリはAzure Static Web Apps上で動作するReactアプリケーションを提供します。 
+Azure Developer CLI (azd)でのデプロイに対応しています。
 
 ## 前提条件
 
@@ -14,16 +15,22 @@
 
 - [Node.js と npm (v18.17.1+)](https://nodejs.org/)
 
+- [Azure Functions Core Tools](https://learn.microsoft.com/azure/azure-functions/functions-run-local)（Functionsを使う場合）
 
-## クイックスタート
+- [Azure Static Web Apps CLI](https://learn.microsoft.com/ja-jp/azure/static-web-apps/static-web-apps-cli-install)（Static Web Appsを使う場合）
 
-Learn ドキュメントの [クイックスタート](https://learn.microsoft.com/azure/developer/azure-developer-cli/get-started?tabs=localinstall&pivots=programming-language-nodejs) に従ってください。
+## azdでのプロジェクト作成
 
-以下の手順で認証、初期化、インフラのプロビジョニングとデプロイを実行します:
+本リポジトリを下にプロジをクトを作成し、新規にGitリポジトリを作成するまでの手順を記載します。  
 
-* プロジェクト作成
+- プロジェクト作成
 
 ```bash
+
+# Git でテンプレートリポジトリをクローン
+git clone ${url}
+cd ${repository}
+
 # azd にログイン（初回のみ）
 azd auth login
 
@@ -31,25 +38,23 @@ azd auth login
 azd init
 ```
 
-* env編集
+- env編集
 
 .azure/<env_name>/.envに必要な環境変数を設定する
 
-* デプロイ
+- デプロイ
 
 ```bash
 # インフラのプロビジョニング
-azd provision
+azd provision -e ${環境名}
 
-# プロビジョニングとデプロイ
-azd up
+# インフラプロビジョニングとアプリのデプロイ両方を実施場合
+azd up -e ${環境名}
 ```
 
-## アーキテクチャ
+- [クイックスタート](https://learn.microsoft.com/azure/developer/azure-developer-cli/get-started?tabs=localinstall&pivots=programming-language-nodejs)
 
-- **Azure Static Web Apps**: フロントエンドホスティング
-
-## 備考
+### 備考
 
 デプロイ後、以下のコマンドでさらなる操作が可能です:
 
@@ -67,72 +72,32 @@ azd up
 
 ---
 
-## プロジェクト構造
+## Reactプロジェクト構築
 
-```md
-components.json           # Tailwind CSSの設定や Reactの設定(TypeScript + JSX)などを決めるルールファイル
-package.json              # プロジェクトの依存関係・スクリプト・メタ情報を管理するファイル
-postcss.config.js         # Tailwindなどで使うPostCSSのプラグイン設定ファイル
-tailwind.config.ts        # Tailwind CSSのカスタマイズ設定（色・フォントなど）
-tsconfig.json             # TypeScriptのコンパイル設定ファイル
+### プロジェクトの依存パッケージをインストール
 
-src/                      # Reactのルーティングとコンポーネントを管理するフォルダ
-    pages/                # 各ページコンポーネントを管理するフォルダ
-    App.tsx           # URLに応じたルーティング
-    main.tsx          # メインプログラム
-    index.css         # 本プロジェクトで使うCSSを定義
-    vite-env.d.ts     # Vite が提供する型情報（特に環境変数や特殊インポート用）を TypeScript に認識させるための型定義ファイル。
-
-components/               # アプリ全体で使いまわすUIコンポーネント群
-    footer.tsx            # フッター部分のUIコンポーネント
-    hormone-icons.tsx     # カスタムアイコンを定義・提供するコンポーネント
-    navbar.tsx            # ナビゲーションバーのUIコンポーネント
-    theme-provider.tsx    # テーマ（ライト/ダーク）の状態管理と提供
-    theme-toggle.tsx      # テーマの切り替えトグルボタンコンポーネント
-    ui/                   # 折りたたみ可能なUIコンポーネント（他にもUI部品が並ぶ想定）
-
-hooks/
-    use-toast.ts          # トースト通知を扱うカスタムフック
-
-lib/
-    utils.ts              # 共通して使われるユーティリティ関数群を定義するファイル
-```
-
----
-
-## 初回構築
-
-このプロジェクトを自分のパソコンで動かすための手順を、初心者の方にも分かりやすく説明します。
-
-### 1. 必要なソフトウェアをインストール
-
-- [Node.js](https://nodejs.org/)（npmが含まれています）
-- [Azure Functions Core Tools](https://learn.microsoft.com/azure/azure-functions/functions-run-local)（Functionsを使う場合）
-- [Azure Static Web Apps CLI](https://learn.microsoft.com/ja-jp/azure/static-web-apps/static-web-apps-cli-install)（Static Web Appsを使う場合）
-
-### 2. プロジェクトの依存パッケージをインストール
-
-#### 2.1 Reactのプロジェクト設定
+#### Reactのプロジェクト設定
 
 ターミナルで以下のコマンドを実施。  
 
 ```sh
+cd src/web
 npm install
 ```
 
-#### 2.2 Functionsの設定
+#### Functionsの設定
 
 ターミナルで、プロジェクトのフォルダに移動して以下のコマンドを実行します。  
 
 ```sh
-cd api
+cd src/api
 npm install
 ```
 
 Functionsを追加する場合は、以下のように記載。  
 
 ```sh
-cd api
+cd src/api
 func new --name <Function Name> --template "HTTP trigger" --authlevel "anonymous"    
 ```
 
@@ -182,7 +147,7 @@ tsconfig.jsonにビルド設定を実施
 npm install
 ```
 
-### 3. アプリを起動する
+### アプリを起動する
 
 以下のコマンドでReactアプリを起動します。
 
@@ -198,21 +163,21 @@ npm run dev
 
 起動後、`http://localhost:5173` にアクセスするとアプリが表示されます。
 
-### 4. Functions（API）を起動する
+### Functions（API）を起動する
 
 API（サーバーレス関数）をローカルで動かすには、`api` フォルダに移動して以下を実行します。
 
 ```sh
-cd api
+cd src/api
 npm start
 ```
 
-### 5. Static Web Apps を起動する
+### Static Web Apps を起動する
 
 Azure Static Web Appsのローカルエミュレーターを使う場合は、プロジェクトのルートで以下を実行します。
 
 ```sh
-swa start http://localhost:5173 --api-location api --verbose
+swa start http://localhost:5173 --api-location src/api --verbose
 ```
 
 これで、フロントエンドとAPIの両方をローカルで確認できます。

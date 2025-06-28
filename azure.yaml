@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 
-name: todo-nodejs-mongo-swa-func
+name: todo-nodejs-swa-func
 metadata:
-  template: todo-nodejs-mongo-swa-func@0.0.1-beta
+  template: todo-nodejs-swa-func@0.0.1-beta
 workflows:
   up: 
     steps:
@@ -15,11 +15,9 @@ services:
     language: js
     host: staticwebapp
     hooks:
-      # Creates a temporary `.env.local` file for the build command. Vite will automatically use it during build.
-      # The expected/required values are mapped to the infrastructure outputs.
-      # .env.local is ignored by git, so it will not be committed if, for any reason, if deployment fails.
-      # see: https://vitejs.dev/guide/env-and-mode
-      # Note: Notice that dotenv must be a project dependency for this to work. See package.json.
+      # ビルドコマンド用の一時的な `.env.local` ファイルを作成します。
+      # .env.local は git に無視されるため、デプロイが失敗した場合でもコミットされません。
+      # 詳細: https://vitejs.dev/guide/env-and-mode
       prepackage:
         windows:
           shell: pwsh
