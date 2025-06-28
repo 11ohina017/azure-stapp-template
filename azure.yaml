@@ -7,12 +7,12 @@ workflows:
   up: 
     steps:
       - azd: provision
-      - azd: deploy --all
+      - azd: deploy web # apiもデプロイする場合はdeploy --all
 services:
   web:
     project: ./src/web
     dist: dist
-    language: js
+    language: ts
     host: staticwebapp
     hooks:
       # ビルドコマンド用の一時的な `.env.local` ファイルを作成します。
@@ -20,22 +20,27 @@ services:
       # 詳細: https://vitejs.dev/guide/env-and-mode
       prepackage:
         windows:
+          shell: pwsh
           run: |
-            echo VITE_API_BASE_URL=%API_BASE_URL%> .env.local
-            echo VITE_APPLICATIONINSIGHTS_CONNECTION_STRING=%APPLICATIONINSIGHTS_CONNECTION_STRING%>> .env.local
+            $env:VITE_API_BASE_URL = $env:API_BASE_URL
+            $env:VITE_APPLICATIONINSIGHTS_CONNECTION_STRING = $env:APPLICATIONINSIGHTS_CONNECTION_STRING
+            "VITE_API_BASE_URL=$env:API_BASE_URL" | Out-File -FilePath .env.local -Encoding utf8
+            "VITE_APPLICATIONINSIGHTS_CONNECTION_STRING=$env:APPLICATIONINSIGHTS_CONNECTION_STRING" | Out-File -FilePath .env.local -Append -Encoding utf8
         posix:
+          shell: sh
           run: |
             echo "VITE_API_BASE_URL=$API_BASE_URL" > .env.local
             echo "VITE_APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING" >> .env.local    
       postdeploy:
         windows:
+          shell: pwsh
           run: |
-            del .env.local
+            if (Test-Path .env.local) { Remove-Item .env.local -Force }
         posix:
+          shell: sh
           run: |
             rm -f .env.local
-  # Functions を使用する場合は、以下のコメントを外して設定を追加します。
-  #api:
-  #  project: ./src/api
-  #  language: js
-  #  host: function
+  api:
+    project: ./src/api
+    language: ts
+    host: function

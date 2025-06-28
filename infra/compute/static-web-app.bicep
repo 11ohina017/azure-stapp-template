@@ -122,7 +122,7 @@ resource symbolicname 'Microsoft.Web/staticSites@2024-04-01' = {
     publicNetworkAccess: publicNetworkAccess // 公共ネットワークアクセスを許可するかどうか
     stagingEnvironmentPolicy: stagingEnvironmentPolicy // PR単位などで動的に生成されるプレビュー環境を有効にするかどうか
     repositoryToken: repositoryToken // リポジトリへのアクセス用トークン
-    //repositoryUrl: repositoryUrl // SWAと連携するリポジトリのURL
+    repositoryUrl: repositoryUrl // SWAと連携するリポジトリのURL
     // テンプレートからリポジトリを新規作成する場合: Static Web Appsと同時に新規にGitリポジトリを作成する
     templateProperties: {
       description: templateDescription // 静的ウェブアプリの説明

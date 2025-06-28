@@ -11,9 +11,23 @@ Azure Developer CLI (azd)でのデプロイに対応しています。
 
 - [Azure Developer CLI (azd)](https://aka.ms/azd-install)
 
-- [Azure Functions Core Tools (v4+)](https://docs.microsoft.com/azure/azure-functions/functions-run-local)
+- [PowerShell7](https://learn.microsoft.com/ja-jp/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5#winget)
+
+```pwsh
+winget install --id Microsoft.PowerShell --source winget
+```
+
+インストール後にユーザー環境変数PATHにpwsh.exeのPATHを設定する。
+
+```md
+C:\Program Files\PowerShell\7
+```
 
 - [Node.js と npm (v18.17.1+)](https://nodejs.org/)
+
+```cmd
+winget install OpenJS.NodeJS.LTS
+```
 
 - [Azure Functions Core Tools](https://learn.microsoft.com/azure/azure-functions/functions-run-local)（Functionsを使う場合）
 
