@@ -20,19 +20,22 @@ services:
       # 詳細: https://vitejs.dev/guide/env-and-mode
       prepackage:
         windows:
-          shell: pwsh
-          run: 'echo "VITE_API_BASE_URL=""$env:API_BASE_URL""" > .env.local ; echo "VITE_APPLICATIONINSIGHTS_CONNECTION_STRING=""$env:APPLICATIONINSIGHTS_CONNECTION_STRING""" >> .env.local'
+          run: |
+            echo VITE_API_BASE_URL=%API_BASE_URL%> .env.local
+            echo VITE_APPLICATIONINSIGHTS_CONNECTION_STRING=%APPLICATIONINSIGHTS_CONNECTION_STRING%>> .env.local
         posix:
-          shell: sh
-          run: 'echo VITE_API_BASE_URL=\"$API_BASE_URL\" > .env.local && echo VITE_APPLICATIONINSIGHTS_CONNECTION_STRING=\"$APPLICATIONINSIGHTS_CONNECTION_STRING\" >> .env.local'    
+          run: |
+            echo "VITE_API_BASE_URL=$API_BASE_URL" > .env.local
+            echo "VITE_APPLICATIONINSIGHTS_CONNECTION_STRING=$APPLICATIONINSIGHTS_CONNECTION_STRING" >> .env.local    
       postdeploy:
         windows:
-          shell: pwsh
-          run: 'rm .env.local'
+          run: |
+            del .env.local
         posix:
-          shell: sh
-          run: 'rm .env.local'
-  api:
-    project: ./src/api
-    language: js
-    host: function
+          run: |
+            rm -f .env.local
+  # Functions を使用する場合は、以下のコメントを外して設定を追加します。
+  #api:
+  #  project: ./src/api
+  #  language: js
+  #  host: function

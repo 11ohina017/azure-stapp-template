@@ -75,9 +75,6 @@ param stappPublicNetworkAccess string = 'Enabled'
 @description('PR単位などで動的に生成されるプレビュー環境を有効にするかどうか')
 param stappStagingEnvironmentPolicy string = 'Enabled'
 
-@description('GitHub Actionのシークレット名の上書き:セキュリティの関係でデフォルトの変数:AZUのE_STATIC_WEB_APPS_API_TOKEN以外の値を使用したいときに使う')
-param stappGithubActionSecretNameOverride string
-
 @description('GitHubリポジトリのURL')
 param stappRepositoryUrl string
 
@@ -136,7 +133,6 @@ module web './compute/static-web-app.bicep' = {
     stagingEnvironmentPolicy: stappStagingEnvironmentPolicy
     skuName: stappSkuName
     skuTier: stappSkuTier
-    githubActionSecretNameOverride: stappGithubActionSecretNameOverride
     repositoryUrl: stappRepositoryUrl
     repositoryToken: stappRepositoryToken
     repositoryOwner: stappRepositoryOwner

@@ -43,25 +43,25 @@ param appLocation string = 'web'
 @description('ビルド後のアプリの出力パス')
 param outputLocation string = 'output'
 
-@description('Null-Allow: GitHub Actionのシークレット名の上書き:セキュリティの関係でデフォルトの変数:AZUのE_STATIC_WEB_APPS_API_TOKEN以外の値を使用したいときに使う')
-param githubActionSecretNameOverride string
+//@description('GitHub Actionのシークレット名の上書き:セキュリティの関係でデフォルトの変数:AZUのE_STATIC_WEB_APPS_API_TOKEN以外の値を使用したいときに使う')
+//param githubActionSecretNameOverride string
 
-@description('Null-Allow: GitHubリポジトリのURL')
+@description('GitHubリポジトリのURL')
 param repositoryUrl string
 
-@description('Null-Allow: リポジトリへのアクセス用トークン')
+@description('リポジトリへのアクセス用トークン')
 param repositoryToken string
 
-@description('Null-Allow: リポジトリの所有者')
+@description('リポジトリの所有者')
 param repositoryOwner string
 
-@description('Null-Allow: リポジトリの名前')
+@description('リポジトリの名前')
 param repositoryName string
 
 @description('リポジトリのプロバイダー')
 param provider string = 'GitHub'
 
-@description('Null-Allow: テンプレートリポジトリのURL')
+@description('テンプレートリポジトリのURL')
 param templateRepositoryUrl string
 
 @description('静的ウェブアプリの説明')
@@ -112,7 +112,8 @@ resource symbolicname 'Microsoft.Web/staticSites@2024-04-01' = {
       appArtifactLocation: appArtifactLocation // ビルド後のアプリ成果物のパス
       appBuildCommand: appBuildCommand // アプリのビルドコマンド
       appLocation: appLocation // アプリコードのパス
-      githubActionSecretNameOverride: empty(githubActionSecretNameOverride) ? null : githubActionSecretNameOverride // GitHub Actionのシークレット名の上書き
+      // 今回は使用しないパラメーターなのでコメントアウト
+      //githubActionSecretNameOverride: empty(githubActionSecretNameOverride) ? null : githubActionSecretNameOverride // GitHub Actionのシークレット名の上書き:セキュリティの関係でデフォルトの変数:AZUのE_STATIC_WEB_APPS_API_TOKEN以外の値を使用したいときに使う
       outputLocation: outputLocation // ビルド後のアプリの出力パス
       skipGithubActionWorkflowGeneration: skipGithubActionWorkflowGeneration // GitHub Actionワークフロー生成をスキップするかどうか
     }
@@ -121,9 +122,8 @@ resource symbolicname 'Microsoft.Web/staticSites@2024-04-01' = {
     publicNetworkAccess: publicNetworkAccess // 公共ネットワークアクセスを許可するかどうか
     stagingEnvironmentPolicy: stagingEnvironmentPolicy // PR単位などで動的に生成されるプレビュー環境を有効にするかどうか
     repositoryToken: repositoryToken // リポジトリへのアクセス用トークン
-    // 既存のGitリポジトリを使用する場合の設定
-    repositoryUrl: repositoryUrl // リポジトリのURL
-    // リポジトリが未作成の場合の設定: Static Web Appsと同時に新規にGitリポジトリを作成する
+    //repositoryUrl: repositoryUrl // SWAと連携するリポジトリのURL
+    // テンプレートからリポジトリを新規作成する場合: Static Web Appsと同時に新規にGitリポジトリを作成する
     templateProperties: {
       description: templateDescription // 静的ウェブアプリの説明
       isPrivate: isPrivate // リポジトリがプライベートかどうか

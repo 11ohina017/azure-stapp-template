@@ -1,6 +1,6 @@
 # はじめに
 
-このリポジトリはAzure Static Web Apps上で動作するReactアプリケーションを提供します。 
+このリポジトリはAzure Static Web Apps上で動作するReactアプリケーションを提供します。  
 Azure Developer CLI (azd)でのデプロイに対応しています。
 
 ## 前提条件
@@ -18,6 +18,21 @@ Azure Developer CLI (azd)でのデプロイに対応しています。
 - [Azure Functions Core Tools](https://learn.microsoft.com/azure/azure-functions/functions-run-local)（Functionsを使う場合）
 
 - [Azure Static Web Apps CLI](https://learn.microsoft.com/ja-jp/azure/static-web-apps/static-web-apps-cli-install)（Static Web Appsを使う場合）
+
+## GitHubでPATを作成
+
+Static Web AppsとGitの連携をBICEPで行う場合はリポジトリシークレットとしてGitHubのPersonal Access Tokenが必要。  
+
+PATは「Personal Access Token（パーソナル アクセス トークン）」の略です。  
+GitHubなどのサービスで、ユーザー名とパスワードの代わりに使うことができる認証用のトークンです。  
+
+作成したPATに以下の権限が必要です。  
+
+- Actions（Read/Write）: GitHub Actionsのワークフローの実行に必要な権限
+- Administration（Read/Write）: リポジトリの作成に必要な権限 (テンプレートからリポジトリを新規作成する場合に必要。かなり強力な権限)
+- Code/Contents（Read/Write）: リポジトリ内のコンテンツやブランチなどへのアクセスする際に必要な権限
+- Secrets (Read/Write) : リポジトシークレットを上書きする場合に必要な権限
+- Workflows (Read/Write) : GitHub Actionsのワークフローファイルの追加のため必要
 
 ## azdでのプロジェクト作成
 
@@ -91,6 +106,7 @@ npm install
 
 ```sh
 cd src/api
+func init . --typescript
 npm install
 ```
 
