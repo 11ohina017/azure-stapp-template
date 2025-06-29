@@ -31,9 +31,6 @@ param apiBuildCommand string = 'npm run build:api'
 @description('ソースコード内のAPIコードのディレクトリパス')
 param apiLocation string = 'api'
 
-@description('ビルド後のアプリ成果物のパス')
-param appArtifactLocation string = 'dist'
-
 @description('アプリのビルドコマンド')
 param appBuildCommand string = 'npm run build:web'
 
@@ -41,10 +38,7 @@ param appBuildCommand string = 'npm run build:web'
 param appLocation string = 'web'
 
 @description('ビルド後のアプリの出力パス')
-param outputLocation string = 'output'
-
-//@description('GitHub Actionのシークレット名の上書き:セキュリティの関係でデフォルトの変数:AZUのE_STATIC_WEB_APPS_API_TOKEN以外の値を使用したいときに使う')
-//param githubActionSecretNameOverride string
+param outputLocation string = 'dist'
 
 @description('GitHubリポジトリのURL')
 param repositoryUrl string
@@ -109,7 +103,8 @@ resource symbolicname 'Microsoft.Web/staticSites@2024-04-01' = {
     buildProperties: {
       apiBuildCommand: apiBuildCommand // APIのビルドコマンド
       apiLocation: apiLocation // APIコードのパス
-      appArtifactLocation: appArtifactLocation // ビルド後のアプリ成果物のパス
+      // 現在は非推奨でoutputLocationが推奨されているため、コメントアウト
+      //appArtifactLocation: appArtifactLocation // ビルド後のアプリ成果物のパス
       appBuildCommand: appBuildCommand // アプリのビルドコマンド
       appLocation: appLocation // アプリコードのパス
       // 今回は使用しないパラメーターなのでコメントアウト

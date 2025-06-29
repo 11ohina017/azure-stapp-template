@@ -18,6 +18,7 @@ winget install --id Microsoft.PowerShell --source winget
 ```
 
 インストール後にユーザー環境変数PATHにpwsh.exeのPATHを設定する。
+ターミナルは設定を反映させるため、ターミナルは再起動。
 
 ```md
 C:\Program Files\PowerShell\7
@@ -73,10 +74,18 @@ azd init
 
 - デプロイ
 
-```bash
+```pwsh
 # インフラのプロビジョニング
 azd provision -e ${環境名}
+```
 
+サービスプリンシパルを作成し、共同作成者のロールを設定。(GitHub Actionsでazure cliやazdを実行する際に必要、アプリのデプロイだけなら不要)
+
+```pwsh
+az ad sp create-for-rbac --name "sp-<rep_name>-<enviroment>" --role contributor --scopes "/subscriptions/<subscripton_id>/resourceGroups/<rg_name>/providers/Microsoft.Web/staticSites/<stapp_name>" --sdk-auth
+```
+
+```pwsh
 # インフラプロビジョニングとアプリのデプロイ両方を実施場合
 azd up -e ${環境名}
 ```
@@ -211,3 +220,18 @@ swa start http://localhost:5173 --api-location src/api --verbose
 ```
 
 これで、フロントエンドとAPIの両方をローカルで確認できます。
+
+---
+
+### GitHub連携機機能を使わずSWA CLIでデプロイする
+
+```pwsh
+# Azure Static Web AppsのGit連携を解除する
+az staticwebapp disconnect --name <stapp-name>  
+
+# Preview環境
+swa deploy --resource-group <rg> --app-name <stapp-name> --app-location src/web --output-location src/web/dist --env preview
+
+# Production
+swa deploy --resource-group <rg> --app-name <stapp-name> --app-location src/web --output-location src/web/dist --env Production
+```

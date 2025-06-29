@@ -103,6 +103,7 @@ const Top: React.FC = () => {
           
           {/* Xポスト埋め込み */}
           <div className="mb-6">
+            {/* 旧Xポスト（コメントアウト）
             <blockquote className="twitter-tweet">
               <p lang="ja" dir="ltr">
                 メニュー改定から二ヶ月。今1番売れているのは"中華そば"塩ラーメンではありません😃{' '}
@@ -111,6 +112,17 @@ const Top: React.FC = () => {
               &mdash; 麺屋だご (@8wzArLcBGkPEQ0M){' '}
               <a href="https://twitter.com/8wzArLcBGkPEQ0M/status/1848524772403302775?ref_src=twsrc%5Etfw">
                 October 22, 2024
+              </a>
+            </blockquote>
+            */}
+            <blockquote className="twitter-tweet">
+              <p lang="ja" dir="ltr">
+                X埋め込みテスト投稿{' '}
+                <a href="https://t.co/IKX7iSaYU6">pic.twitter.com/IKX7iSaYU6</a>
+              </p>
+              &mdash; Hinasode合同会社 北村太一 (@11ohina017){' '}
+              <a href="https://twitter.com/11ohina017/status/1939255806526108084?ref_src=twsrc%5Etfw">
+                June 29, 2025
               </a>
             </blockquote>
           </div>

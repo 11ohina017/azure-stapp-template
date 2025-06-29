@@ -37,22 +37,19 @@ param stappAllowConfigFileUpdates bool = false
 param stappTargetBranch string = 'main'
 
 @description('APIのビルドコマンド')
-param stappApiBuildCommand string = 'npm run build:api'
+param stappApiBuildCommand string = 'npm run build'
 
 @description('ソースコード内のAPIコードのディレクトリパス')
 param stappApiLocation string = 'api'
 
-@description('ビルド後のアプリ成果物のパス')
-param stappAppArtifactLocation string = 'dist'
-
 @description('アプリのビルドコマンド')
-param stappAppBuildCommand string = 'npm run build:web'
+param stappAppBuildCommand string = 'npm run build'
 
 @description('アプリコードのパス')
 param stappAppLocation string = 'web'
 
 @description('ビルド後のアプリの出力パス')
-param stappOutputLocation string = 'output'
+param stappOutputLocation string = 'dist'
 
 @description('リポジトリのプロバイダー')
 param stappProvider string = 'GitHub'
@@ -120,7 +117,6 @@ module web './compute/static-web-app.bicep' = {
     targetBranch: stappTargetBranch
     apiBuildCommand: stappApiBuildCommand
     apiLocation: stappApiLocation
-    appArtifactLocation: stappAppArtifactLocation
     appBuildCommand: stappAppBuildCommand
     appLocation: stappAppLocation
     outputLocation: stappOutputLocation

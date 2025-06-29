@@ -169,7 +169,7 @@ const Menu: React.FC = () => {
                 <h3 className="text-xl font-bold text-gray-900">しおそば</h3>
                 <span className="text-2xl font-bold text-red-600">¥880</span>
               </div>
-              <p className="text-gray-600 leading-relaxed">当店自慢の鶏ガラ醤油スープ。昔ながらの優しい味わい。</p>
+              <p className="text-gray-600 leading-relaxed">あっさりなのに深い。余白に旨みがある塩ラーメン。</p>
             </div>
           </div>
 

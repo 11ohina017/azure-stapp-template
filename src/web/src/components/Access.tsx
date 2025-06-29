@@ -135,7 +135,7 @@ const Access: React.FC = () => {
             <h3 className="text-2xl font-bold text-gray-900 mb-6">地図</h3>
             <div className="w-full h-96 rounded-lg overflow-hidden">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3276.7123456789!2d133.9234567!3d34.6678901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s%E5%B2%A1%E5%B1%B1%E7%9C%8C%E5%B2%A1%E5%B1%B1%E5%B8%82%E5%8C%97%E5%8C%BA%E9%B9%BF%E7%94%B0%E7%94%BA1%E4%B8%81%E7%9B%AE7-19!5e0!3m2!1sja!2sjp!4v1640995200000!5m2!1sja!2sjp"
+                src={`${StoreInfo.MAP_URL}`}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
